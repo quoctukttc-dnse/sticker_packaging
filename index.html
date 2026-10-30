@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Đối chiếu Sticker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <h1>Đối chiếu Sticker / Nhãn</h1>
+    <p class="sub">So file <b>tác nghiệp (.xlsx)</b> với <b>proof sticker</b> chủ hàng / nhà cung cấp nhãn gửi về (.pdf) trước khi sản xuất. Mọi xử lý chạy trên máy anh/chị — file không được tải lên đâu cả.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="steps">
+    <div class="card step">
+      <div class="num">1</div>
+      <div class="body">
+        <h2>File tác nghiệp</h2>
+        <label class="drop" id="dropX">
+          <input type="file" id="fileX" accept=".xlsx,.xlsm,.xls">
+          <span>Chọn hoặc kéo thả file Excel tác nghiệp</span>
+        </label>
+        <div id="xInfo" class="muted small"></div>
+      </div>
+    </div>
+    <div class="card step">
+      <div class="num">2</div>
+      <div class="body">
+        <h2>Proof sticker (PDF)</h2>
+        <label class="drop" id="dropP">
+          <input type="file" id="fileP" accept=".pdf" multiple>
+          <span>Chọn hoặc kéo thả 1 hay nhiều file PDF</span>
+        </label>
+        <div id="pInfo" class="muted small"></div>
+      </div>
+    </div>
+    <div class="card step">
+      <div class="num">3</div>
+      <div class="body">
+        <h2>Đối chiếu</h2>
+        <button id="btnRun" class="primary" disabled>Bắt đầu đối chiếu</button>
+        <button id="btnExport" class="ghost" disabled>Xuất báo cáo Excel</button>
+        <div id="progress" class="progress hidden"><div class="bar"><i></i></div><span class="ptext"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <details class="card settings">
+    <summary>Thiết lập kiểm tra (mã cố định, bảng size, thành phần)</summary>
+    <div class="grid2">
+      <label>RN# cố định<input id="sRN" value="54867"></label>
+      <label>CA# cố định<input id="sCA" value="67359"></label>
+      <label>Tháng sản xuất in trên nhãn (vd 12 26) — để trống nếu không kiểm<input id="sMonth" placeholder="MM YY"></label>
+      <label>Loại hàng (chọn bảng size China)
+        <select id="sType"><option value="auto">Tự nhận</option><option value="top">Tops (áo)</option><option value="bottom">Bottoms (quần)</option></select>
+      </label>
+    </div>
+    <label class="full">Thành phần vải mong đợi (tùy chọn — dán từ tác nghiệp / email chủ hàng)
+      <textarea id="sComp" rows="2" placeholder="Body: 100% Polyester; Lace: 62% recycled polyamide, 37% polyamide, 1% elastane"></textarea>
+    </label>
+    <label class="full">Bảng dịch size (CSV: English,French,Italian,Spanish,China Tops,China Bottoms)
+      <textarea id="sSize" rows="7"></textarea>
+    </label>
+    <div class="row"><button id="btnResetSet" class="ghost small">Khôi phục mặc định</button><span class="muted small">Thiết lập được lưu trên trình duyệt này.</span></div>
+  </details>
+
+  <section id="xSummary"></section>
+  <section id="results"></section>
+</main>
+
+<div id="lightbox" class="lightbox hidden"><img alt=""></div>
+
+<script src="lib/xlsx.full.min.js"></script>
+<script src="lib/jszip.min.js"></script>
+<script src="lib/pdf.min.js"></script>
+<script src="lib/tesseract/tesseract.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
